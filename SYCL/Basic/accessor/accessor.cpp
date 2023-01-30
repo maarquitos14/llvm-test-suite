@@ -678,7 +678,8 @@ int main() {
       std::cout << "exception received: " << e.what() << std::endl;
       assert(e.code() == sycl::errc::kernel_argument && "incorrect error code");
     } catch (...) {
-      std::cout << "some other exception" << std::endl;
+      std::cout << "Some other exception (line " << __LINE__ << ")"
+                << std::endl;
       return 1;
     }
   }
@@ -711,7 +712,8 @@ int main() {
       std::cout << "exception received: " << e.what() << std::endl;
       assert(e.code() == sycl::errc::kernel_argument && "incorrect error code");
     } catch (...) {
-      std::cout << "some other exception" << std::endl;
+      std::cout << "Some other exception (line " << __LINE__ << ")"
+                << std::endl;
       return 1;
     }
   }
@@ -747,7 +749,8 @@ int main() {
       std::cout << "exception received: " << e.what() << std::endl;
       assert(e.code() == sycl::errc::kernel_argument && "incorrect error code");
     } catch (...) {
-      std::cout << "some other exception" << std::endl;
+      std::cout << "Some other exception (line " << __LINE__ << ")"
+                << std::endl;
       return 1;
     }
   }
