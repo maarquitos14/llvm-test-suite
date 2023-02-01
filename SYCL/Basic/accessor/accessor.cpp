@@ -669,8 +669,8 @@ int main() {
       q.submit([&](sycl::handler &cgh) {
         // we do NOT call .require(acc) without which we should throw a
         // synchronous exception with errc::kernel_argument
-        cgh.parallel_for<class ph>(r,
-                                   [=](sycl::id<1> index) { acc[index] = 0; });
+        cgh.parallel_for<class ph1>(r,
+                                    [=](sycl::id<1> index) { acc[index] = 0; });
       });
       q.wait_and_throw();
       assert(false && "we should not be here, missing exception");
@@ -704,7 +704,7 @@ int main() {
         // is usually optimized away for this particular scenario, but the
         // exception should be thrown because of passing it, not because of
         // using it
-        cgh.single_task<class ph>([=] { int x = acc[0]; });
+        cgh.single_task<class ph2>([=] { int x = acc[0]; });
       });
       q.wait_and_throw();
       assert(false && "we should not be here, missing exception");
@@ -738,7 +738,7 @@ int main() {
         // The particularity of this test is that it passes to a command
         // one bound accessor and one unbound accessor. In the past, this
         // has led to throw the wrong exception.
-        cgh.single_task<class ph>([=] {
+        cgh.single_task<class ph3>([=] {
           volatile int x = acc[0];
           volatile int y = acc2[0];
         });
