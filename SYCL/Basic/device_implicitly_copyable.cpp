@@ -370,7 +370,7 @@ int main() {
       assert(result_opt_arr[i] == i);
     }
 
-      assert(result_opt == ref_val);
+    assert(result_opt == ref_val);
   }
 
   {
