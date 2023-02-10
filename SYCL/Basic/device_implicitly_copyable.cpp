@@ -191,8 +191,8 @@ int main() {
     DataT result_variant;
     q.submit([&](sycl::handler &cgh) {
        cgh.single_task([=]() {
-         // std::variant with complex types relies on virtual functions, so
-         // they cannot be used within sycl kernels
+         // Some implementations of std::variant with complex types relies on
+         // virtual functions, so they cannot be used within sycl kernels
          auto size = sizeof(variant_arr[0]);
          size = sizeof(variant);
        });
