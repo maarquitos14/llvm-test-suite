@@ -56,7 +56,6 @@ int main() {
     assert(sizeInKernel == 1024);
     assert(workItemBufferSizeInKernel == 80);
 
-
     // Check common reference semantics
     std::hash<stream> Hasher;
 
