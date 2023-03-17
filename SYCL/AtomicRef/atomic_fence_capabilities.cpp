@@ -12,9 +12,16 @@ using namespace sycl;
 
 void checkFenceBehaviour(memory_order order, memory_scope scope) {
   auto q = queue();
-  memory_order order_write = order;
+  // Both read and write being release or acquire is wrong. In case order is
+  // release or acquire we need read to be acquire and write to be release.
+  // If we flip both acquire and release, we will be checking the same case
+  // (read == acquire, write == release) twice, so we just skip one case and
+  // flip for the other.
+  if (order == memory_order::acquire)
+    return;
   memory_order order_read = order;
-  if (memory_order::release == order_read) {
+  memory_order order_write = order;
+  if (order == memory_order::release) {
     order_read = memory_order::acquire;
   }
 
